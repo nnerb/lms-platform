@@ -41,7 +41,7 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-       await axios.patch(`api/courses/${courseId}`, values);
+       await axios.patch(`/api/courses/${courseId}`, values);
        toast.success("Course updated!");
        toggleEdit();
        router.refresh();
@@ -49,7 +49,6 @@ export const TitleForm = ({ initialData, courseId }: TitleFormProps) => {
       toast.error("Something went wrong.")
     }
   } 
-
 
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
