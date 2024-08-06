@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import { ToastProvider } from "@/components/providers/toaster-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Loader2 } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +22,18 @@ export default function RootLayout({
     <ClerkProvider afterSignOutUrl="/">
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <ThemeProvider attribute="class" defaultTheme="system" >
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <ClerkLoading>
+            <div className="flex flex-col items-center justify-center h-full gap-1">
+              <Loader2 className="animate-spin text-muted-foreground"/>
+              <p>Just a moment..</p>
+            </div>
+          </ClerkLoading>
+          <ClerkLoaded>
             <ToastProvider />
             {children}
-          </ThemeProvider>
+          </ClerkLoaded>
+        </ThemeProvider>
         </body>
       </html>
     </ClerkProvider> 

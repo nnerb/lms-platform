@@ -1,6 +1,6 @@
 "use client"
 
-import { UserButton } from "@clerk/nextjs"
+import { useClerk, UserButton } from "@clerk/nextjs"
 import { usePathname } from "next/navigation"
 import { Button } from "./ui/button"
 import { LogOut } from "lucide-react"
@@ -13,6 +13,7 @@ export const NavbarRoutes = () => {
 
   const isTeacherPage = pathname?.startsWith("/teacher")
   const isPlayerPage = pathname?.includes("/chapter")
+  const { signOut } = useClerk()
  
   return (
     <div className="flex gap-x-2 ml-auto">

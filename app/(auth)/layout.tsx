@@ -1,11 +1,21 @@
 import { ClerkLoaded, ClerkLoading, SignedOut } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { Loader2 } from "lucide-react";
+import { redirect } from "next/navigation";
 
 const AuthLayout = ({
   children
 }: {
   children: React.ReactNode
 }) => {
+
+
+  const { userId } = auth()
+
+  if (userId) {
+    return redirect("/")
+  }
+
   return (
     <div className="h-full grid place-items-center">
       <div className="flex flex-col gap-5 py-5">
